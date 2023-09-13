@@ -1,14 +1,23 @@
+import { useState } from "react";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
-import { StickNotes } from "./components/StickNotes";
+import { StickyNotes } from "./components/StickyNotes";
+import NotesContext from "./hooks/notesContext";
+
+interface NotesProps {
+  title: string;
+  description: string;
+}
 
 function App() {
+  const [notes, setNotes] = useState<NotesProps[]>([]);
+
   return (
-    <>
+    <NotesContext.Provider value={{ notes, setNotes }}>
       <Header />
       <Hero />
-      <StickNotes />
-    </>
+      <StickyNotes />
+    </NotesContext.Provider>
   );
 }
 

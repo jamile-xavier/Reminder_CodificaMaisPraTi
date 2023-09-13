@@ -1,19 +1,27 @@
 import { useState } from "react";
 import reminderLogo from "../../assets/images/Logo.jpg";
-import { Container } from "./styles";
 import { Button } from "../Button";
+import { NewStickyModal } from "../NewStickyModal";
+import { Container } from "./styles";
 
 export function Header() {
-  const [number, setNumber] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  function increment() {
-    setNumber(number + 1);
+  function handleOpenModal() {
+    setIsModalOpen(true);
+  }
+
+  function handleCloseModal() {
+    setIsModalOpen(false);
   }
 
   return (
     <Container>
       <img src={reminderLogo} alt="Logo React Reminder" />
-      <Button title="Adicionar lembrete" onClick={increment} />
+
+      <Button title="Adicionar Lembrete" onClick={handleOpenModal} />
+
+      <NewStickyModal isOpen={isModalOpen} onRequestClose={handleCloseModal} />
     </Container>
   );
 }
